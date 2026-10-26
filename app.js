@@ -3,6 +3,15 @@ const addButton = document.getElementsByTagName("button")[0];
 const todoList = document.getElementById("incompleteTasks");
 const completedList = document.getElementById("completed-tasks");
 
+const createDeleteButton = function () {
+  const deleteButton = document.createElement("button");
+  const icon = document.createElement("img");
+  deleteButton.className = "delete";
+  icon.src = "./remove.svg";
+  deleteButton.appendChild(icon);
+  return deleteButton;
+};
+
 const createTaskItem = function (taskText) {
   const taskItem = document.createElement("li");
 
@@ -10,8 +19,7 @@ const createTaskItem = function (taskText) {
   const label = document.createElement("label");
   const editInput = document.createElement("input");
   const editButton = document.createElement("button");
-  const deleteButton = document.createElement("button");
-  const deleteButtonImage = document.createElement("img");
+  const deleteButton = createDeleteButton();
 
   // Keep user text out of HTML markup.
   label.innerText = taskText;
@@ -24,15 +32,7 @@ const createTaskItem = function (taskText) {
   editButton.innerText = "Edit";
   editButton.className = "edit";
 
-  deleteButton.className = "delete";
-  deleteButtonImage.src = "./remove.svg";
-  deleteButton.appendChild(deleteButtonImage);
-
-  taskItem.appendChild(checkbox);
-  taskItem.appendChild(label);
-  taskItem.appendChild(editInput);
-  taskItem.appendChild(editButton);
-  taskItem.appendChild(deleteButton);
+  taskItem.append(checkbox, label, editInput, editButton, deleteButton);
   return taskItem;
 };
 
